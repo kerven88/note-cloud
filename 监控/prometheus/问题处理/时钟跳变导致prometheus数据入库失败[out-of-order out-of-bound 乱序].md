@@ -90,7 +90,7 @@ global:
 ...
 storage:
   tsdb:
-     out_of_order_time_window: 12h
+    out_of_order_time_window: 12h
 ```
 
 修改配置前的日志
@@ -135,10 +135,23 @@ ts=2025-04-10T05:43:09.303Z caller=db.go:1712 level=info component=tsdb msg="Del
 ts=2025-04-10T05:43:09.304Z caller=db.go:1712 level=info component=tsdb msg="Deleting obsolete(过时的) block" block=01JRF3JEKREMXTW6ST878Y6G0G
 ```
 
-~~删除了过时的块, 还是会把旧数据清理掉, 这个方法没意义啊...~~ 哦, 是因为prometheus的`--storage.tsdb.retention.tim`参数只设置了7天, 即只保留7天的数据, 调整时间到1年后就会把旧数据清理掉. 如果只向后调1小时, 就不会全部清理了.
+~~删除了过时的块, 还是会把旧数据清理掉, 这个方法没意义啊...~~ 哦, 是因为prometheus的`--storage.tsdb.retention.time`参数只设置了7天, 即只保留7天的数据, 调整时间到1年后就会把旧数据清理掉. 如果只向后调1小时, 就不会全部清理了.
 
 ------
 
 添加此配置后, 调整时间到1小时后, 再修改回来, 还是不能正常采集数据, 需要手动重启prometheus或是reload才可以.
 
 猜测: 开启此配置并重启后, 就相当于以当前时间为真实时间, 在允许的时间范围内直接进行覆写, 也不管是否冲突了.
+
+------
+
+默认情况下
+
+1. 向前调1小时, 数据将不再能写入, 且不会自动恢复(重启无效);
+2. 向前调1小时, 数据不再写入, 等待3分钟(40分钟)后恢复正常时间, 可以自动恢复;
+
+添加`out_of_order_time_window=2h`配置后;
+
+1. 向前调1小时, 数据将不再能写入, 且不会自动恢复;
+
+所以该配置对时间向前跳转的作用不大.

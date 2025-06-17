@@ -36,8 +36,9 @@ tailpid=$!
 ## 类似于高级程序语言中的join函数, 阻塞等待子线程完成
 wait $tailpid
 tailpid=
-
 ```
+
+> 就算不需要"tailpid", `&`与`wait`也是必需的.
 
 然后将脚本拷贝到镜像中
 
