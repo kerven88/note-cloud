@@ -113,7 +113,28 @@ ip netns exec netns05 ip link set lo up
 
 由于此时`netns01`和`netns02`中的`veth13`和`veth25`没有IP地址, 因此没有生成到`netns03(10.10.10.0/24)`或`netns05(10.10.1.0/24)`的路由. `netns03`中ping不通`netns01`中的`172.16.0.1`, `netns01`中也ping不通`netns03`中的`10.10.0.2`.
 
-按照calico本身的做法, 是使用了一个不存在的IP地址`169.254.1.1`, 并且添加了一条永久的`arp`记录指向veth pair位于宿主机的一端(对应图中的`veth13/veth14`和`veth25/veth26`设备).
+按照calico本身的做法, 是使用了一个不存在的IP地址`169.254.1.1`, 并且添加了一条永久的`arp`记录指向veth pair位于宿主机的一端(对应图中的`veth13/veth14`和`veth25/veth26`设备)
+
+```
+## 在容器中执行
+$ ip neigh
+169.254.1.1 dev eth0 lladdr ee:ee:ee:ee:ee:ee STALE
+```
+
+ta们一般被命名为`calixxxxxx`, 且所有的cali接口的mac地址都是`ee:ee:ee:ee:ee:ee`.
+
+```log
+## 在宿主机上执行
+$ ip a 
+216: calia545d3c8995@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netns cni-7ef37cd4-6c61-eb35-1879-d4fa5b7f5d0f
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+217: caliadb27a3b9e2@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netns cni-e3ecd82f-bf41-b995-03f5-1ff86697c19b
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+```
 
 这里我们简单一点.
 

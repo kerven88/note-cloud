@@ -27,7 +27,7 @@ root        137     49  0 04:20 ?        00:00:02 bird6 -R -s /var/run/calico/bi
 
 宿主机上的路由输出如下
 
-```
+```log
 $ ip r
 default via 192.168.0.1 dev ens34 proto static metric 101 
 10.23.36.192/26 via 192.168.0.124 dev ens34 proto bird 
