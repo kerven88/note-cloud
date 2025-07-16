@@ -81,7 +81,7 @@ ts=2025-04-12T05:50:12.364Z caller=scrape.go:1744 level=warn component="scrape m
 ts=2025-04-12T05:31:56.394Z caller=scrape.go:1741 level=warn component="scrape manager" scrape_pool=k8s_cAdvisor target=https://192.168.203.253:6443/api/v1/nodes/white-master-2/proxy/metrics/cadvisor msg="Error on ingesting out-of-order samples" num_dropped=434
 ```
 
-乱序也会导致新数据无法入库, 但由于旧数据
+乱序也会导致新数据无法入库
 
 ## 解决方案
 
@@ -148,7 +148,7 @@ ts=2025-04-10T05:43:09.304Z caller=db.go:1712 level=info component=tsdb msg="Del
 默认情况下
 
 1. 向前调1小时, 数据将不再能写入, 且不会自动恢复(重启无效);
-2. 向前调1小时, 数据不再写入, 等待3分钟(40分钟)后恢复正常时间, 可以自动恢复;
+2. 向前调1小时, 数据不再写入, 等待3-40分钟后恢复正常时间, 可以自动恢复;
 
 添加`out_of_order_time_window=2h`配置后;
 

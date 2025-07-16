@@ -5,3 +5,10 @@
     - taskset 查看cpu绑定情况
 
 kubelet 需要配置`--cpu-manager-policy="static"`
+
+较新版本的kubelet已经将这个参数放到`/var/lib/kubelet/config.yaml`配置文件里了, 而且`cpuManagerPolicy`要求预留cpu槽位, 必须同时指定`reservedSystemCPUs`.
+
+```yml
+cpuManagerPolicy: static
+reservedSystemCPUs: 1-7
+```
