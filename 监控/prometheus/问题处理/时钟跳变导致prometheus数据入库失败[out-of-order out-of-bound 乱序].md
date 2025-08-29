@@ -15,6 +15,8 @@
 7. [如何解决Prometheus的数据回填问题](https://blog.csdn.net/sinat_32582203/article/details/128727107)
 8. [记一次远程写性能问题引发的Prometheus版本升级事件](https://cloud.tencent.com/developer/article/2314673)
     - `storage.tsdb.out_of_order_time_window`在配置文件中写法, `storage`与`global`平级
+9. [Understanding Duplicate Samples and Out-of-order Timestamp Errors in Prometheus](https://promlabs.com/blog/2022/12/15/understanding-duplicate-samples-and-out-of-order-timestamp-errors-in-prometheus/)
+
 
 ## 场景描述
 

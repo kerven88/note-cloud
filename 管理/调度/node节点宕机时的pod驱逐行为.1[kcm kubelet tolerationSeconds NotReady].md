@@ -103,6 +103,12 @@ spec:
 
 > kube-controller-manager 的`--pod-eviction-timeout`选项根本不管用.
 
+### Node重新变为Ready时, 反而开始驱逐statefulset pod
+
+statefulset Pod 变为 Terminating 时, 会被添加上`deletionTimestamp`与`deletionGracePeriodSeconds`.
+
+当出问题的节点重启Ready时, Pod会被删除重建(pod uid会变化), 自然也会重新调度, 有可能会被调度到其他节点上.
+
 ## --node-monitor-grace-period 调整 Node NotReady 的判断间隔
 
 在 kube-controller-manager yaml 中增加如下配置, 可以调整 Node NotReady 的判断间隔, 默认为 40s, kcm 重启后即可生效.

@@ -1,5 +1,14 @@
 # 获取集群中最新100条event事件
 
+参考文章
+
+1. [resmoio/kubernetes-event-exporter](https://github.com/resmoio/kubernetes-event-exporter)
+2. [Kubernetes Event Exporter](https://grafana.com/grafana/dashboards/17882-kubernetes-event-exporter/)
+    - grafana
+3. [Kubernetes events will disappear after one hour #52521](https://github.com/kubernetes/kubernetes/issues/52521)
+    - kube-apiserver 默认配置`--event-ttl=1h0m0s`, 主要是为了避免给 etcd 造成压力.
+
+
 ## 场景描述
 
 k8s默认只保存1小时内的event事件, 1小时前的会被自动清除.
