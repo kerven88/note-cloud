@@ -40,7 +40,7 @@ container_memory_rss
 - ==============================================================================
 - `container_memory_rss`表示程序真实的活跃内存(堆栈程序段数据段等)
 - `container_memory_working_set_bytes`包含了`container_memory_rss`, 以及部分`container_memory_cache`(被频繁访问的 page cache).
-    - 更接近操作系统的"实际可用内存压力"视角
+    - 更接近操作系统的"实际可用内存压力"视角, 也是`crictl stats ${containerID}`的值
 - `container_memory_usage_bytes`应该是`container_memory_working_set_bytes`+`container_memory_cache`, 表示cgroup眼中的实际使用内存.
     - `container_memory_usage_bytes`早早的到达了 limit 上限, 为保证 working_set 的使用, 就开始回收 cache. 因此在`container_memory_usage_bytes`到1G后, `container_memory_working_set_bytes`与`container_memory_cache`呈现相反的趋势.
 

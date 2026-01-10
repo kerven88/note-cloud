@@ -10,7 +10,7 @@ redis-slave-0    0/1     ContainerCreating   0          2m17s
 
 `describe`没有查看到异常, 怀疑了很久, 好在pod有日志打印出来.
 
-```
+```log
 # k logs -f redis-master-0
  06:41:30.35 INFO  ==> ** Starting Redis **
 1:C 02 Dec 2019 06:41:30.358 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
