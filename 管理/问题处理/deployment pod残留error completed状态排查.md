@@ -38,7 +38,7 @@ shutdownGracePeriodCriticalPods: 30s
 
 ## 场景描述
 
-执行reboot关机, 该节点上的 deployment pod 变成`Completed`或是`Error`状态, 一直保留不清理, 新的 pod 会在其他节点上重建, 也不影响 deployement 实际的副本数.
+执行reboot关机, 该节点上的 deployment pod 变成`Completed`或是`Error`状态, 一直保留不清理, 新的 pod 会在其他节点上重建, 也不影响 deployement 实际的副本数, **必现**.
 
 
 ```log
