@@ -19,8 +19,6 @@ metadata:
     uid: f2a4a16f-aa5a-4e30-825f-34c9b808159d
     blockOwnerDeletion: true
     controller: true
-  resourceVersion: "3767755"
-  uid: 8d59503c-1b7f-4ec8-b396-2a20108f0b17
 ```
 
 ## Garbage Collection/垃圾清理/级联删除
