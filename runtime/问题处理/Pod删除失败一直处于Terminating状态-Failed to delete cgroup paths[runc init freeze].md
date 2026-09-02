@@ -1,5 +1,9 @@
 # Pod删除失败一直处于Terminating状态-Failed to delete cgroup paths
 
+参考文章
+
+1. [Preventing containers from being unable to be deleted](https://github.com/opencontainers/runc/pull/4757)
+
 ## 场景描述
 
 ```log
