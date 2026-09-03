@@ -51,7 +51,9 @@ Sep 01 10:20:30 yong-worker-1 kubelet[15326]: time="2026-09-01T10:20:30+08:00" l
 
 ## 解决方法
 
-runc的bug，runc会被freeze，导致无法kill，有两种解决方法，1是升级runc版本到1.31.1及以上，2是切成cgroup v2
+runc的bug，runc会被freeze，导致无法kill，见参考文章1.
+
+解决方法是升级到 cgroup v2
 
 ```log
 root@yong-worker-1:/sys/fs/cgroup/pids/kubepods.slice/kubepods-podf72055a8_691a_4c8f_acea_f0b7a679cb4c.slice/cri-containerd-2050d2711d962bd24b20aa68445afaef598f83ac32d84a4ae45396c25683f479.scope# ps -ef | grep -f

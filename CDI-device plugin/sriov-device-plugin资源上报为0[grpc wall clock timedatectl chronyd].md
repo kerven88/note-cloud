@@ -155,7 +155,7 @@ gRPC的tcp_keepalive_time默认也是2小时, 而ACK超时时间默认则是20�
 在下一次发送 Keep-Alive 包前3秒, 执行如下命令调整node节点时间.
 
 ```bash
-kill -STOP $(pidof kubelet); sleep 5; systemctl restart chronyd; sleep 1; kill -CONT $(pidof kubelet);
+kill -STOP $(pidof kubelet); sleep 5; systemctl restart chronyd; sleep 1; kill -CONT $(pidof kubelet); date;
 ```
 
 其中`kill -STOP`可以冻结 kubelet , 让其不再得到CPU时间片, `kill -CONT`恢复. 具体时间线如下
@@ -197,6 +197,8 @@ I0901 09:01:37.373379       1 server.go:209] ListAndWatch(sriov_net_A) goroutine
 I0901 09:01:37.373450       1 server.go:208] ListAndWatch(sriov_net_B): stream context cancelled
 I0901 09:01:37.373476       1 server.go:209] ListAndWatch(sriov_net_B) goroutine exiting
 ```
+
+> kubelet被冻结, 所以日志打印PING与ACK的时间延迟了, 但是"stream context cancelled"的时间距离原本的PING包应该出现的时间, 正好是20秒.
 
 ## 解决方案
 
